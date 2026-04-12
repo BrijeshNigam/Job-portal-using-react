@@ -40,6 +40,24 @@ const Dashborad = () => {
           <p className="text-muted">Active Jobs</p>
         </div>
       </section>
+
+      <section className="container mt-12 grid grid-cols-4 md-hidden gap-6">
+        {[
+          { label: "Active Jobs", val: "10K+", color: "var(--primiry)" },
+          { label: "DSA Problems", val: "500+", color: "var(--secondary)" },
+          { label: "Companies", val: "200+", color: "var(--success)" },
+          { label: "Students", val: "50K+", color: "var(--accent)" },
+        ].map((stat) => (
+          <div key={stat.label} className="card glass-card text-center">
+            <h3 style={{ color: stat.color, fontSize: "2.5rem" }}>
+              {stat.val}
+            </h3>
+            <p className="text-muted" style={{ fontWeight: 600 }}>
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </section>
     </div>
   );
 };

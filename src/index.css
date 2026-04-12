@@ -3,7 +3,7 @@
 :root {
   --primiry: #128ce4;
   --primiry-hover: #128ce4;
-  --secondry: #6f3bdf;
+  --secondary: #6f3bdf;
   --accent: #aa3bff;
   --backgrond: #0ff7d4;
   --surface: #b81ad3;
@@ -13,7 +13,7 @@
   --border:#94a3b8;
   --glass: #ffffff80;
   --glass-border: #ffffff40;
-  --sucess: #22c55e;
+  --success: #22c55e;
   --warning: #eab308;
   --error: #ef4444;
 
