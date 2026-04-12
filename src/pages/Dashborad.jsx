@@ -58,6 +58,78 @@ const Dashborad = () => {
           </div>
         ))}
       </section>
+
+      <section className="container mt-12">
+        <h2 className="mb-8" style={{ fontSize: "2rem" }}>
+          Popular Modules
+        </h2>
+        <div className="grid grid-cols-3 gap-6">
+          <Link to="/prep/dsa" className="card flex-col gap-4">
+            <div
+              style={{
+                width: "40px",
+                height: "40px",
+                background: "rgba(99, 102, 241, 0.1)",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyItems: "center",
+                padding: "10px",
+              }}
+            >
+              <Zap color="var(--primiry)" />
+            </div>
+            <h3>DSA Mastery Sheet</h3>
+            <p className="text-muted">
+              Tpoic-wise curated problems for sde roles.
+            </p>
+          </Link>
+
+          <Link to="/prep/aptitude" className="card flex-cols gap-4">
+            <div
+              style={{
+                width: "40px",
+                height: "40px",
+                background: "rgba(236, 72, 153, 0.1)",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyItems: "center",
+                padding: "10px",
+              }}
+            >
+              <Target color="var(--secondary)" />
+            </div>
+            <h3>Apititude Training</h3>
+            <p className="text-muted">
+              Quantitative, logical, and verbal reasing set.
+            </p>
+          </Link>
+
+          <Link to="/companies" className="card flex-col gap-4">
+            <div
+              style={{
+                width: "40px",
+                height: "40px",
+                background: "rgba(16, 185, 129, 0.1)",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyItems: "center",
+                padding: "10px",
+              }}
+            >
+              <Award color="var(--success)" />
+            </div>
+            <h3>Company Insights</h3>
+            <p className="text-muted">
+              Detailed patterns for FAANG and Service companies.
+            </p>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 };
+
+export default Dashborad;
