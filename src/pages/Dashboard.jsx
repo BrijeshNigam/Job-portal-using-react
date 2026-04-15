@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dashborad = () => {
+const Dashboard = () => {
   return (
     <div className="animate-fade">
       <section className="container mt-12 text-center">
@@ -132,4 +132,4 @@ const Dashborad = () => {
   );
 };
 
-export default Dashborad;
+export default Dashboard;

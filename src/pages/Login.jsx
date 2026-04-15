@@ -38,4 +38,19 @@ const Login = () => {
         baby: JOSN.stringify(FormData),
     });
     
-  }
+    const data = await responce.json();
+    if (!responce.ok) throw new Error(data.message || 'something went worng');
+
+    Login(data.user, data.token);
+    navigate('/');
+  } catch (err) {
+    setError(err.message);
+  } finally{
+    setLoading(false);
+  };
+  
+  return (
+    <div className="animate-fade container" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem'}}>
+      <div className="card glass-card" ></div>
+    </div>
+  )
