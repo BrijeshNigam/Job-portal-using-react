@@ -57,6 +57,21 @@ function App() {
           />
         </Routes>
       </main>
+
+      <div
+        className="footer container mt-12 mb-8 text-center text-muted"
+        style={{ borderTop: "1px solid var(--border)", paddingTop: "2rem" }}
+      >
+        <p>
+          <i class="fas fa-copyright    ">
+            {" "}
+            2026 Brijesh nigam. Built with react and his passion or
+            consistency{" "}
+          </i>
+        </p>
+      </div>
     </AuthProvider>
   );
 }
+
+export default App;
