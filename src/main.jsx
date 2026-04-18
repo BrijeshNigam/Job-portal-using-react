@@ -7,7 +7,7 @@ import PrepHub from "./pages/PrepHub";
 import DSAPrep from "./pages/DSAPrep";
 import Companies from "./pages/Companies";
 // import Login from "./pages/Login";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./Context/AuthContext";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
               }
             />
             <Route
-              path="prep/hr"
+              path="/prep/hr"
               elements={
                 <div className="container mt-12">
                   <h1>HR Interview Tips</h1>
