@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import {
   Book,
   CheckCircle,
-  ChevrounUp,
-  ChevrounDown,
+  ChevronDown,
+  ChevronUp,
   ExternalLink,
 } from "lucide-react";
 
@@ -12,11 +12,7 @@ const dsaTopics = [
     id: 1,
     title: "Arrays & Hashing",
     problems: [
-      {
-        name: "Two sum",
-        dificulty: "Easy",
-        link: "https://leetcode.com/problems/two-sum/",
-      },
+      { name: "Two Sum", difficulty: "Easy", link: "https://leetcode.com/problems/two-sum/" },
       {
         name: "Contains Duplicate",
         difficulty: "Easy",
@@ -98,23 +94,21 @@ const DSAPrep = () => {
   const [expanded, setExpanded] = useState(1);
   const [completed, setCompleted] = useState({});
 
-  const toggleComplete = (probName) => {
+  const toggleComplete = (problemName) => {
     setCompleted((prev) => ({
       ...prev,
-      [probName]: !prev[probName],
+      [problemName]: !prev[problemName],
     }));
   };
 
   return (
     <div className="container animate-fade mt-8">
-      <h1 style={{ fontSize: "2rem", marginBottom: "1rem " }}>
-        DSA Mastery Sheet
-      </h1>
-      <p className="text-muted mb-12">
-        Systematic Preparation for top-tier product companies.
+      <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>DSA Mastery Sheet</h1>
+      <p className="text-muted mb-8">
+        Systematic preparation for product company interviews.
       </p>
 
-      <div className="flex-col gap-4">
+      <div className="flex flex-col gap-4">
         {dsaTopics.map((topic) => (
           <div
             key={topic.id}
@@ -122,15 +116,14 @@ const DSAPrep = () => {
             style={{ padding: "0" }}
           >
             <button
-              onClick={() =>
-                setExpanded(expanded === topic.id ? null : topic.id)
-              }
+              onClick={() => setExpanded(expanded === topic.id ? null : topic.id)}
               className="w-full flex justify-between items-center"
               style={{
-                background: "Transparent",
+                background: "transparent",
                 padding: "1.5rem",
                 color: "var(--text)",
               }}
+              type="button"
             >
               <div className="flex items-center gap-4">
                 <div
@@ -140,15 +133,15 @@ const DSAPrep = () => {
                     borderRadius: "0.5rem",
                   }}
                 >
-                  <Book size={20} color="var(--primiry)" />
+                  <Book size={20} color="var(--primary)" />
                 </div>
-                <h3 style={{ fontSize: "1.25rem" }}> {topic.title} </h3>
-                <span className="budge">{topic.problems.lenght} Problems</span>
+                <h3 style={{ fontSize: "1.25rem" }}>{topic.title}</h3>
+                <span className="badge">{topic.problems.length} Problems</span>
               </div>
               {expanded === topic.id ? (
-                <ChevrounUp size={20} />
+                <ChevronUp size={20} />
               ) : (
-                <ChevrounDown size={20} />
+                <ChevronDown size={20} />
               )}
             </button>
 
@@ -178,9 +171,9 @@ const DSAPrep = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {topic.problems.map((prob, idx) => (
+                    {topic.problems.map((problem) => (
                       <tr
-                        key={idx}
+                        key={problem.name}
                         style={{ borderBottom: "1px solid var(--border)" }}
                       >
                         <td style={{ padding: "1rem" }}>
@@ -188,27 +181,31 @@ const DSAPrep = () => {
                             size={20}
                             style={{
                               cursor: "pointer",
-                              color: completed[prob.name]
+                              color: completed[problem.name]
                                 ? "var(--success)"
                                 : "var(--text-muted)",
                               transition: "color 0.2s ease",
                             }}
-                            onClick={() => toggleComplete(prob.name)}
+                            onClick={() => toggleComplete(problem.name)}
                           />
                         </td>
                         <td style={{ padding: "1rem", fontWeight: 600 }}>
-                          {prob.name}
+                          {problem.name}
                         </td>
                         <td style={{ padding: "1rem" }}>
                           <span
-                            className={`badge ${prob.difficulty === "Easy" ? "badge-success" : "badge-primary"}`}
+                            className={`badge ${
+                              problem.difficulty === "Easy"
+                                ? "badge-success"
+                                : "badge-primary"
+                            }`}
                           >
-                            {prob.difficulty}
+                            {problem.difficulty}
                           </span>
                         </td>
                         <td style={{ padding: "1rem" }}>
                           <a
-                            href={prob.link}
+                            href={problem.link}
                             target="_blank"
                             rel="noreferrer"
                             className="text-primary flex items-center gap-1"

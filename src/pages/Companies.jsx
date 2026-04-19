@@ -1,32 +1,34 @@
 import React from "react";
+import { Building2, ClipboardList, Users } from "lucide-react";
 
 const companyData = [
   {
     name: "Google",
-    pattern: "Aptitude (Numberical, Verbal, Reasoning) + Coding",
+    pattern: "Aptitude, coding round, and technical interviews",
     syllabus:
-      "Quants: Profit & Loss, Time & Work. Coding: Basic Logic, String Handling.",
-    eligibility: "60% throughout in 10th, 12th & Gradution. 1 Backlog allowed",
-    color: "#eb1c24",
+      "Quant, reasoning, strings, arrays, trees, and problem-solving basics.",
+    eligibility: "Strong academics and problem-solving fundamentals.",
+    color: "#ea4335",
   },
   {
-    name: "Jay P. Morgan",
-    pattern: "QA (2 Coding + Behaviour) + 3 Technical Round + Bar Raiser",
-    syllabus: "DSA: Tree, Graphs, DP.",
-    eligibility: "Consistency in acadimics. Strong Problem sloving skills.",
+    name: "JPMorgan Chase",
+    pattern: "Online assessment, technical interviews, and bar raiser",
+    syllabus: "DSA, OOPs, DBMS, and coding interview practice.",
+    eligibility: "Consistent academics with good communication skills.",
     color: "#12decd",
   },
   {
     name: "Adobe",
-    pattern: "OA (Aptitude + CS Fundamentals + Coding) + 3-4 Interviews",
-    syllabus: "OS, DBMS, OOPS, DSA. Frontend system design for UI roles.",
-    eligibility: "Minimum 7.5 CGPA preferred.",
-    color: "#ed1c23b6",
+    pattern: "OA, CS fundamentals, coding, and multiple interview rounds",
+    syllabus: "OS, DBMS, OOPs, DSA, and frontend system design for UI roles.",
+    eligibility: "Usually 7.5+ CGPA preferred.",
+    color: "#ed1c24",
   },
   {
-    name: " Congizent ",
-    pattern: "Aptitude + Logical + Technical + HR",
-    eligibility: "No active backlog. 60% in degree.",
+    name: "Cognizant",
+    pattern: "Aptitude, logical reasoning, technical, and HR rounds",
+    syllabus: "Quantitative aptitude, coding basics, and communication rounds.",
+    eligibility: "No active backlog and solid degree performance.",
     color: "rgba(23, 226, 155, 0.81)",
   },
 ];
@@ -35,20 +37,21 @@ const Companies = () => {
   return (
     <div className="container animate-fade mt-8">
       <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-        Company Hiring Prosesses
+        Company Hiring Processes
       </h1>
-      <p className="text-muted mb-12">
-        Stay update with the latest exam patterns and eligibility criteria.
+      <p className="text-muted mb-8">
+        Stay updated with exam patterns, interview flow, and eligibility
+        criteria.
       </p>
 
       <div className="grid grid-cols-2 gap-8">
-        {companyData.map((co, idx) => (
+        {companyData.map((company) => (
           <div
-            key={idx}
+            key={company.name}
             className="card glass-card"
-            style={{ borderLeft: `5px solid ${co.color}` }}
+            style={{ borderLeft: `5px solid ${company.color}` }}
           >
-            <div className="flex item-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-4">
               <div
                 style={{
                   padding: "0.75rem",
@@ -56,43 +59,43 @@ const Companies = () => {
                   borderRadius: "0.75rem",
                 }}
               >
-                <Building2 size={24} color={co.color} />
+                <Building2 size={24} color={company.color} />
               </div>
-              <h2 style={{ fontSize: "1.5rem" }}>
-                {co.name}
-                Exam Pattern
-              </h2>
-              <p style={{ fontWeight: 500 }}> {co.pattern} </p>
+              <div>
+                <h2 style={{ fontSize: "1.5rem" }}>{company.name}</h2>
+                <p style={{ fontWeight: 500 }}>{company.pattern}</p>
+              </div>
             </div>
 
             <div className="flex gap-3 mt-4">
-              <ClipboardList className="text-primiry" size={20} />
+              <ClipboardList className="text-primary" size={20} />
               <div>
                 <h4 style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
                   Syllabus Highlight
                 </h4>
-                <p style={{ fontWeight: 500 }}> {co.syllabus} </p>
+                <p style={{ fontWeight: 500 }}>{company.syllabus}</p>
               </div>
             </div>
 
             <div className="flex gap-3 mt-4">
-              <Users className="text-primiry" size={20} />
+              <Users className="text-primary" size={20} />
               <div>
                 <h4 style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
                   Eligibility Criteria
                 </h4>
-                <p style={{ fontWeight: 500 }}> {co.eligibility} </p>
+                <p style={{ fontWeight: 500 }}>{company.eligibility}</p>
               </div>
             </div>
 
             <button
-              className="btn w-full mt-6"
+              className="btn w-full mt-8"
               style={{
                 background: "var(--surface-light)",
                 justifyContent: "center",
               }}
+              type="button"
             >
-              View Details Guide
+              View Detailed Guide
             </button>
           </div>
         ))}

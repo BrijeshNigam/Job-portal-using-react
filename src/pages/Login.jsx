@@ -1,211 +1,279 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import {
-  LogIn,
-  UserPlus,
-  Mail,
-  Lock,
-  User,
-  Github,
-  Globe,
-  ArrowRight,
   AlertCircle,
+  ArrowRight,
+  Globe,
+  Lock,
+  LogIn,
+  Mail,
+  User,
+  UserPlus,
+  Workflow,
 } from "lucide-react";
-import e from "cors";
+import { useAuth } from "../Context/AuthContext";
+
+const initialFormState = { name: "", email: "", password: "" };
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState(initialFormState);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { Login } = useAuth();
-  const navigate = useNavigate;
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = sync { e } => {
-  e.preventDefailt();
-  setError('');
-  setLoading(true);
-}
+  const handleChange = (field) => (event) => {
+    setFormData((prev) => ({ ...prev, [field]: event.target.value }));
+  };
 
-const endpoint = isRegister ? 'register' : 'login';
-try {
-  const responce = await fetch(`http://localhost.5000/api/auth`$(endpoint), {
-    method: 'POST';
-    headers: { 'Content-type': 'application/json' },
-    baby: JOSN.stringify(FormData),
-  });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
 
-  const data = await responce.json();
-  if (!responce.ok) throw new Error(data.message || 'something went worng');
+    const endpoint = isRegister ? "register" : "login";
 
-  Login(data.user, data.token);
-  navigate('/');
-} catch (err) {
-  setError(err.message);
-} finally {
-  setLoading(false);
-};
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/auth/${endpoint}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
 
-return (
-  <div className="animate-fade container"
+      const data = await response.json();
 
-    style={{
-      minHeight: '80vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '2rem 1rem',
-    }}
-  >
-    <div className="card glass-card"
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong.");
+      }
+
+      login(data.user, data.token);
+      setFormData(initialFormState);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div
+      className="animate-fade container"
       style={{
-        width: '100%',
-        maxWidth: '480px',
-        padding: "3rem",
-        position: 'relative',
-        overflow: 'hidden',
+        minHeight: "80vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "2rem 1rem",
       }}
     >
-      {/* Decorative Background flair */}
       <div
+        className="card glass-card"
         style={{
-          position: "absolute",
-          top: '-10px',
-          width: '150px',
-          height: '150px',
-          background: 'blue(80px)',
-          borderRadius: '50%',
+          width: "100%",
+          maxWidth: "480px",
+          padding: "3rem",
+          position: "relative",
+          overflow: "hidden",
         }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: "-10%",
-          left: "-10%",
-          width: "150px",
-          height: "150px",
-          background: "var(--secondary)",
-          filter: "blur(80px)",
-          opacity: "0.15",
-          borderRadius: "50%",
-        }}
-      ></div>
-      <div className="text-center mb-10">
+      >
         <div
           style={{
-            display: 'inline-flex',
-            padding: '1rem',
-            background: "rgba(99, 102, 241, 0.1)",
-            borderRadius: '1.25rem',
-            marginBottom: '1.5rem',
-            color: "var(--primary)",
+            position: "absolute",
+            top: "-10%",
+            right: "-10%",
+            width: "150px",
+            height: "150px",
+            background: "var(--primary)",
+            filter: "blur(80px)",
+            opacity: 0.15,
+            borderRadius: "50%",
           }}
-        >
-          {isRegister ? <UserPlus size={30} /> : <LogIn size={30} />}
-        </div>
-        <h1
+        />
+        <div
           style={{
-            fontSize: '2.25rem',
-            marginBottom: '8.5rem',
-            fontWeight: 800,
-          }}>
-          {isRegister ? "Aao apka ji wait hai" : "Aa gye mere pass"}
-        </h1>
-        <p className="text-muted">
-          {isRegister
-            ? "Phle account banao phir kuch bataunga me apko kaise prepration kre okey buddy"
-            : "Login kro apne Personal dashbraod jane ke liye"}
-        </p>
-      </div>
+            position: "absolute",
+            bottom: "-10%",
+            left: "-10%",
+            width: "150px",
+            height: "150px",
+            background: "var(--secondary)",
+            filter: "blur(80px)",
+            opacity: 0.15,
+            borderRadius: "50%",
+          }}
+        />
 
-      {error && (
-        <div className="animate-fade"
-        style={{
+        <div className="text-center mb-8">
+          <div
+            style={{
+              display: "inline-flex",
+              padding: "1rem",
+              background: "rgba(2, 132, 199, 0.12)",
+              borderRadius: "1.25rem",
+              marginBottom: "1.5rem",
+              color: "var(--primary)",
+            }}
+          >
+            {isRegister ? <UserPlus size={30} /> : <LogIn size={30} />}
+          </div>
+          <h1
+            style={{
+              fontSize: "2.25rem",
+              marginBottom: "0.75rem",
+              fontWeight: 800,
+            }}
+          >
+            {isRegister ? "Create your account" : "Welcome back"}
+          </h1>
+          <p className="text-muted">
+            {isRegister
+              ? "Register to access your personal dashboard and prep tools."
+              : "Sign in to continue to your dashboard and saved progress."}
+          </p>
+        </div>
+
+        {error && (
+          <div
+            className="animate-fade"
+            style={{
               display: "flex",
               alignItems: "center",
               gap: "0.75rem",
               background: "rgba(239, 68, 68, 0.1)",
               border: "1px solid rgba(239, 68, 68, 0.2)",
-              color: "#f87171",
+              color: "#b91c1c",
               padding: "1rem",
               borderRadius: "var(--radius-md)",
               marginBottom: "1.5rem",
               fontSize: "0.9rem",
             }}
-        >
-          <AlertCircle size={20} />
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="flex-col gap-5">
-        {isRegister && (
-          <div className="flex-col gap-2">
-            <label style={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              color: "var(--text-muted)",
-            }}
-            >
-               Full Name 
-            </label>
-            <div
-            style={{
-              position: 'relative'
-            }}>
-              <User
-              style={{
-                    position: "absolute",
-                    left: "1rem",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    color: "var(--text-muted)",
-                  }} />
-                  <input type="text" 
-                  placeholder="Name"
-                  style={{
-                    width: "100%",
-                    padding: "0.875rem 1rem 0.875rem 3rem",
-                    borderRadius: "var(--radius-lg)",
-                    background: "var(--surface)",
-                    border: "1px solid var(--border)",
-                    color: "white",
-                    fontSize: "1rem",
-                    outline: "none",
-                    transition: "border-color 0.2s ease",
-                  }}
-                  value={formData.name}
-                  onChange={(e) => 
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  required
-                  />
-            </div>
+          >
+            <AlertCircle size={20} />
+            {error}
           </div>
         )}
-        <div className="flex-col gap-2">
-          <label style={{
-            fontSize: "0.9rem",
-                fontWeight: 600,
-                color: "var(--text-muted)",
-          }}>
-            Email Address 
-          </label>
-          <div style={{ position: 'relative'}}>
-            <Mail 
-            size={18}
-                style={{
-                  position: "absolute",
-                  left: "1rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  color: "var(--text-muted)",
-                }} />
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {isRegister && (
+            <div className="flex flex-col gap-2">
+              <label className="label">Full Name</label>
+              <div style={{ position: "relative" }}>
+                <User className="input-icon" size={18} />
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  className="input"
+                  value={formData.name}
+                  onChange={handleChange("name")}
+                  required
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col gap-2">
+            <label className="label">Email Address</label>
+            <div style={{ position: "relative" }}>
+              <Mail className="input-icon" size={18} />
+              <input
+                type="email"
+                placeholder="example@mail.com"
+                className="input"
+                value={formData.email}
+                onChange={handleChange("email")}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="label">Password</label>
+            <div style={{ position: "relative" }}>
+              <Lock className="input-icon" size={18} />
+              <input
+                type="password"
+                placeholder="********"
+                className="input"
+                value={formData.password}
+                onChange={handleChange("password")}
+                required
+              />
+            </div>
+          </div>
+
+          <button
+            className="btn btn-primary w-full justify-center mt-4"
+            style={{ padding: "1rem", fontSize: "1rem" }}
+            disabled={loading}
+            type="submit"
+          >
+            {loading
+              ? "Processing..."
+              : isRegister
+                ? "Create Account"
+                : "Sign In"}
+            <ArrowRight size={18} />
+          </button>
+        </form>
+
+        <div className="mt-8">
+          <div className="divider">
+            <span
+              className="text-muted"
+              style={{ fontSize: "0.8rem", fontWeight: 600 }}
+            >
+              Or continue with
+            </span>
+          </div>
+
+          <div className="flex gap-4">
+            <button
+              className="btn w-full justify-center"
+              style={{
+                background: "var(--surface-light)",
+                borderRadius: "var(--radius-lg)",
+              }}
+              type="button"
+            >
+              <Globe size={20} /> Google
+            </button>
+            <button
+              className="btn w-full justify-center"
+              style={{
+                background: "var(--surface-light)",
+                borderRadius: "var(--radius-lg)",
+              }}
+              type="button"
+            >
+              <Workflow size={20} /> GitHub
+            </button>
           </div>
         </div>
-      </form>
+
+        <p className="text-center mt-8 text-muted">
+          {isRegister ? "Already have an account?" : "New here?"}
+          <button
+            style={{
+              color: "var(--primary)",
+              background: "none",
+              marginLeft: "0.5rem",
+              fontSize: "0.95rem",
+            }}
+            onClick={() => setIsRegister((prev) => !prev)}
+            type="button"
+          >
+            {isRegister ? "Sign in" : "Create one"}
+          </button>
+        </p>
+      </div>
     </div>
-  </div>
-)
+  );
+};
+
+export default Login;
