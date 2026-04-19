@@ -1,4 +1,6 @@
 import React from "react";
+import { ArrowRight, Zap, Target, Award, USers } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -28,6 +30,18 @@ const Dashboard = () => {
           a wide range of job opportunities, connect with top employeers, and
           access valueble resorces to advince your career.
         </p>
+        <div className="flex justify-center gap-4">
+          <Link to="/jobs" className="btn btn-primary">
+            Explore Jobs <ArrowRight size={20} />
+          </Link>
+          <Link
+            to="/prep"
+            className="btn"
+            style={{ background: "var(--surface-light)" }}
+          >
+            Start Preparing
+          </Link>
+        </div>
       </section>
 
       {/* Stats/Features  */}
