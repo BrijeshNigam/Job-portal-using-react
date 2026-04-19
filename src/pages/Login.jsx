@@ -12,6 +12,7 @@ import {
   ArrowRight,
   AlertCircle,
 } from "lucide-react";
+import e from "cors";
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -139,7 +140,72 @@ return (
         </div>
       )}
 
-      
+      <form onSubmit={handleSubmit} className="flex-col gap-5">
+        {isRegister && (
+          <div className="flex-col gap-2">
+            <label style={{
+              fontSize: '0.9rem',
+              fontWeight: 500,
+              color: "var(--text-muted)",
+            }}
+            >
+               Full Name 
+            </label>
+            <div
+            style={{
+              position: 'relative'
+            }}>
+              <User
+              style={{
+                    position: "absolute",
+                    left: "1rem",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--text-muted)",
+                  }} />
+                  <input type="text" 
+                  placeholder="Name"
+                  style={{
+                    width: "100%",
+                    padding: "0.875rem 1rem 0.875rem 3rem",
+                    borderRadius: "var(--radius-lg)",
+                    background: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    color: "white",
+                    fontSize: "1rem",
+                    outline: "none",
+                    transition: "border-color 0.2s ease",
+                  }}
+                  value={formData.name}
+                  onChange={(e) => 
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                  />
+            </div>
+          </div>
+        )}
+        <div className="flex-col gap-2">
+          <label style={{
+            fontSize: "0.9rem",
+                fontWeight: 600,
+                color: "var(--text-muted)",
+          }}>
+            Email Address 
+          </label>
+          <div style={{ position: 'relative'}}>
+            <Mail 
+            size={18}
+                style={{
+                  position: "absolute",
+                  left: "1rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: "var(--text-muted)",
+                }} />
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 )
