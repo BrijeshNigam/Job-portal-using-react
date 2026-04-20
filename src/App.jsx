@@ -8,6 +8,7 @@ import DSAPrep from "./pages/DSAprep";
 import Companies from "./pages/Companies";
 import Login from "./pages/Login";
 import { AuthProvider } from "./Context/AuthContext";
+import { Analytics } from "@vercel/analytics/next";
 
 function PlaceholderPage({ title, description }) {
   return (
